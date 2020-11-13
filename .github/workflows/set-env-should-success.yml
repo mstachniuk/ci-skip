@@ -3,7 +3,7 @@ on: [push]
 jobs:
   hello_world_job:
     runs-on: ubuntu-latest
-    name: Build
+    name: Should success
     steps:
       - uses: actions/checkout@v2
         with:
@@ -13,6 +13,8 @@ jobs:
       - uses: mstachniuk/ci-skip@master
       - name: Check env
         run: |
+          echo "CI_SKIP is $CI_SKIP"
+          echo "CI_SKIPNOT is $CI_SKIP_NOT"
           if [[ "$CI_SKIP" != true ]]; then
             echo "The CI_SKIP env should be set to true, but it is: $CI_SKIP"
             exit 1
