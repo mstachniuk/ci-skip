@@ -1,5 +1,9 @@
 name: 'CI-SKIP-ACTION'
 description: 'GitHub Actions to skip build execution based on commit message'
+author: Marcin Stachniuk
+branding:
+  color: blue
+  icon: skip-forward
 inputs:
   fail-fast:
     description: 'When set to true then build will fail immediately. There is no way to mark a build success and skip next steps.'
