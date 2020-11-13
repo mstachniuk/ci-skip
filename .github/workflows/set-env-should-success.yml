@@ -8,7 +8,8 @@ jobs:
       - uses: actions/checkout@v2
         with:
           # Contains [ci skip] in message body
-          ref: 'c8c3a6c5'
+          ref: 'c8c3a6c540e19b25e1cc6a560db9fca36cff495d'
+          fetch-depth: '0'
       - uses: mstachniuk/ci-skip@master
       - name: Check env
         run: |
