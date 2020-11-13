@@ -31,7 +31,7 @@ jobs:
           # For PR it's temporary merge commit to current master and orginal commit message is missing.
           # For big projects can be set to 1000 for performance reasons.
           fetch-depth: '0'
-      - uses: mstachniuk/ci-skip@master
+      - uses: mstachniuk/ci-skip@v1
         with:
           fail-fast: true
       - name: Verification
@@ -45,7 +45,7 @@ You can customize this exit code:
 [source,yaml]
 ----
 [...]
-      - uses: mstachniuk/ci-skip@master
+      - uses: mstachniuk/ci-skip@v1
         with:
           fail-fast: true
           exit-code: 22
@@ -72,7 +72,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: '0'
-      - uses: mstachniuk/ci-skip@master
+      - uses: mstachniuk/ci-skip@v1
       - name: Check if expression CI_SKIP
         # Remember to check condition in each step
         if: ${{ env.CI_SKIP == 'false' }}
@@ -94,7 +94,7 @@ If you like to use another marker than `[ci skip]` for skipping CI build then us
 [source,yaml]
 ----
 [...]
-      - uses: mstachniuk/ci-skip@master
+      - uses: mstachniuk/ci-skip@v1
         with:
           commit-filter: 'banana banana'
 [...]
