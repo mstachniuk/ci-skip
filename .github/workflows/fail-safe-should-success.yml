@@ -24,12 +24,12 @@ jobs:
             exit 2
           fi
       - name: Check if expression CI_SKIP
-        if: ! $CI_SKIP
+        if: ! env.CI_SKIP
         run: |
           echo "This step should not be executed"
           echo "CI_SKIP is $CI_SKIP"
       - name: Check if expression CI_SKIP_NOT
-        if: $CI_SKIP_NOT
+        if: env.CI_SKIP_NOT
         run: |
           echo "This step should not be executed"
           echo "CI_SKIP_NOT is $CI_SKIP_NOT"
