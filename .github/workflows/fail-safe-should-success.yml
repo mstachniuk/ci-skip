@@ -14,7 +14,7 @@ jobs:
       - name: Check env
         run: |
           echo "CI_SKIP is $CI_SKIP"
-          echo "CI_SKIPNOT is $CI_SKIP_NOT"
+          echo "CI_SKIP_NOT is $CI_SKIP_NOT"
           if [[ "$CI_SKIP" != true ]]; then
             echo "The CI_SKIP env should be set to true, but it is: $CI_SKIP"
             exit 1
@@ -23,3 +23,16 @@ jobs:
             echo "The CI_SKIP_NOT env should be set to false, but it is: $CI_SKIP_NOT"
             exit 2
           fi
+      - name: Check if expression CI_SKIP
+        if: ${{ env.CI_SKIP == 'false' }}
+        run: |
+          echo "This step should not be executed"
+          echo "CI_SKIP is $CI_SKIP"
+          exit 3
+      - name: Check if expression CI_SKIP_NOT
+        if: ${{ env.CI_SKIP_NOT == 'true' }}
+        run: |
+          echo "This step should not be executed"
+          echo "CI_SKIP_NOT is $CI_SKIP_NOT"
+          exit 4
+

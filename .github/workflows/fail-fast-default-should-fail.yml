@@ -13,6 +13,6 @@ jobs:
       - uses: mstachniuk/ci-skip@master
         with:
           fail-fast: true
-      - name: Check env
+      - name: Verification
         run: |
-          echo "The previous step should exiting with 42 code"
+          echo "The previous step should exiting with 42 code and this code should not run"

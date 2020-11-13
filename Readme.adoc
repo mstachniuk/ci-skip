@@ -7,13 +7,66 @@ e.g. to avoid many releases after several merges to master/main branch.
 This is standard functionality well known in other CI systems, but missed in GitHub Actions.
 That's why this is needed.
 
-If the commit message (or merge message) contains `[ci skip]` the action will stop.
+If the commit message (or a merge message) contains `[ci skip]` (in subject of body) the action will stop.
 
 == Use cases
 
-TODO
+=== Simple fail fast
+
+The simplest use case is to fail job fast after evaluating action.
+
+[source,yaml]
+----
+on: [push]
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: Build
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          # The git history is needed for good evaluation of Pull Request commit messages.
+          # By default this action checkout only last commit.
+          # For PR it's temporary merge commit to current master and orginal commit message is missing.
+          # For big projects can be set to 1000 for performance reasons.
+          fetch-depth: '0'
+      - uses: mstachniuk/ci-skip@master
+        with:
+          fail-fast: true
+      - name: Verification
+        run: |
+          echo "The previous step should exiting with 42 code and this code should not run"
+----
+
+The action will immediately exit before `Validation` step returning exit code 42.
+You can customize this exit code:
+
+[source,yaml]
+----
+[...]
+      - uses: mstachniuk/ci-skip@master
+        with:
+          fail-fast: true
+          exit-code: 22
+[...]
+----
+
+Now step will immediately exit with exit code 22.
+If you don't like it, try fail-safe.
+
+=== Fail safe
+
+== Google Chrome Extension
+
+If you would decide on merge to skip or not an action the https://github.com/mstachniuk/shipkit-chrome-extension[shipkit-chrome-extension] can be helpful.
 
 == Alternatives
 
-TODO
+. https://github.com/veggiemonk/skip-commit/issues/5[Just use YAML]
+It doesn't work for merge commits.
+. https://github.com/marketplace/actions/skip-based-on-commit-message[Skip based on commit message]
+It's a nice solution, but doesn't work on merge commits. And it's unamintained anymore.
+. https://github.com/styfle/cancel-workflow-action[Cancel Workflow Action]
+It can cancel jobs with a status of `queued` or `in_progress`.
 
