@@ -57,6 +57,51 @@ If you don't like it, try fail-safe.
 
 === Fail safe
 
+This is default behaviour.
+Remember to check in each next step the `env.CI_SKIP` or `env.CI_SKIP_NOT` value in `if`.
+
+[source,yaml]
+----
+on: [push]
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: Should success
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - uses: mstachniuk/ci-skip@master
+      - name: Check if expression CI_SKIP
+        # Remember to check condition in each step
+        if: ${{ env.CI_SKIP == 'false' }}
+        run: |
+          echo "This step should not be executed when commit message contains [ci skip]"
+      - name: Check if expression CI_SKIP_NOT
+        # Remember to check condition in each step
+        if: ${{ env.CI_SKIP_NOT == 'true' }}
+        run: |
+          echo "This step should not be executed when commit message contains [ci skip]"
+----
+
+In this approach the build will success when commit message contains `[ci skip]`.
+
+=== Change commit filter
+
+If you like to use another marker than `[ci skip]` for skipping CI build then use `commit-filter` input.
+
+[source,yaml]
+----
+[...]
+      - uses: mstachniuk/ci-skip@master
+        with:
+          commit-filter: 'banana banana'
+[...]
+----
+
+In this case when commit message contains `banana banana` then action will be skipped.
+
 == Google Chrome Extension
 
 If you would decide on merge to skip or not an action the https://github.com/mstachniuk/shipkit-chrome-extension[shipkit-chrome-extension] can be helpful.
