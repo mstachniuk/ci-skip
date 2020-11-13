@@ -3,7 +3,7 @@ on: [push]
 jobs:
   hello_world_job:
     runs-on: ubuntu-latest
-    name: Should fail exit code 11
+    name: Should fail exit code 22
     steps:
       - uses: actions/checkout@v2
         with:
@@ -13,7 +13,7 @@ jobs:
       - uses: mstachniuk/ci-skip@master
         with:
           fail-fast: true
-          exit-code: 11
+          exit-code: 22
       - name: Check env
         run: |
-          echo "The previous step should exiting with 11 code"
+          echo "The previous step should exiting with 22 code"
