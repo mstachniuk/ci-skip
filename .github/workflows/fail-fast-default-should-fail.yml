@@ -1,0 +1,17 @@
+on: [push]
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: Build
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          # Contains [ci skip] in message body
+          ref: 'c8c3a6c5'
+      - uses: mstachniuk/ci-skip@master
+        with:
+          fail-fast: true
+      - name: Check env
+        run: |
+          echo "The previous step should exiting with 42 code"
