@@ -1,4 +1,4 @@
-name: 'CI SKIP'
+name: 'CI-SKIP'
 description: 'GitHub Actions to skip build execution based on commit message'
 inputs:
   fail-fast:
