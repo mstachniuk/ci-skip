@@ -2,8 +2,9 @@
 
 echo "fail-fast ${fail-fast}"
 echo "exit-code ${exit-code}"
-echo "fail_fast ${fail_fast}"
-echo "exit_code ${exit_code}"
-echo "FAIL_FAST ${FAIL_FAST}"
-echo "EXIT_CODE ${EXIT_CODE}"
+echo "inputs.fail-fast ${{ inputs.fail-fast }}"
+echo "inputs.exit-code ${{ inputs.exit-code }}"
+echo "inputs.fail_fast ${{ inputs.fail_fast }}"
+echo "inputs.exit_code ${{ inputs.exit_code }}"
+
 echo "End"
