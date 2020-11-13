@@ -9,8 +9,12 @@ inputs:
     description: 'Sets the exit code for action when fail-fast is set to true. Default: 42.'
     required: false
     default: '42'
+  commit-filter:
+    description: 'Sets the text in commit messages when skip the action. Default: [ci skip]'
+    required: false
+    default: '[ci skip]'
 runs:
   using: "composite"
   steps:
-    - run: $GITHUB_ACTION_PATH/script.sh ${{ inputs.fail-fast }} ${{ inputs.exit-code }}
+    - run: $GITHUB_ACTION_PATH/script.sh ${{ inputs.fail-fast }} ${{ inputs.exit-code }} ${{ inputs.commit-filter }}
       shell: bash
