@@ -3,11 +3,14 @@ on: [push]
 jobs:
   hello_world_job:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: Build
     steps:
       - uses: actions/checkout@v2
-      - id: foo
-        uses: mstachniuk/ci-skip@master
+      - uses: mstachniuk/ci-skip@master
         with:
           exit-code: 11
           fail-fast: true
+      - name: Check env
+        run: |
+          echo "CI_SKIP: $CI_SKIP"
+          echo "CI_SKIP_NOT: $CI_SKIP_NOT"
