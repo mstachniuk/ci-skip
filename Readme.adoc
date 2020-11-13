@@ -1,0 +1,19 @@
+= CI SKIP
+
+GitHub Actions to skip build execution based on commit message
+
+Sometimes there is a need to skip build on Continuous Integration (CI) server (GitHub Actions in this case),
+e.g. to avoid many releases after several merges to master/main branch.
+This is standard functionality well known in other CI systems, but missed in GitHub Actions.
+That's why this is needed.
+
+If the commit message (or merge message) contains `[ci skip]` the action will stop.
+
+== Use cases
+
+TODO
+
+== Alternatives
+
+TODO
+
