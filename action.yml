@@ -1,0 +1,16 @@
+name: 'CI SKIP'
+description: 'GitHub Actions to skip build execution based on commit message'
+inputs:
+  fail-fast:
+    description: 'When set to true then build will fail immediately. There is no way to mark a build success and skip next steps.'
+    required: false
+    default: 'false'
+  exit-code:
+    description: 'Sets the exit code for action when fail-fast is set to true. Default: 42.'
+    required: false
+    default: '42'
+runs:
+  using: "composite"
+  steps:
+    - run: script.sh
+      shell: bash
