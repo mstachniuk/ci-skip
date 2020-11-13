@@ -1,0 +1,20 @@
+on: [push]
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: Build
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          # Contains [ci skip] in message body
+          ref: 'c8c3a6c5'
+      - uses: mstachniuk/ci-skip@master
+      - name: Check env
+        run: |
+          if [[ ! $CI_SKIP ]]; then
+            echo "The CI_SKIP env should be set to true, but it is: $CI_SKIP"
+          fi
+          if [[ $CI_SKIP_NOT ]]; then
+            echo "The CI_SKIP_NOT env should be set to false, but it is: $CI_SKIP_NOT"
+          fi

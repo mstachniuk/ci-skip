@@ -11,22 +11,23 @@ if [[ "$is_merge_commit" -eq 1 ]]; then
   readonly local commit_id=$(echo "$last_commit_log" | sed 's/Merge //' | sed 's/ into [a-zA-Z0-9]*//')
   last_commit_log=$(git log -1 --pretty="%s %b" $commit_id)
 fi
-echo "last commit log: $last_commit_log"
+echo "Last commit log: $last_commit_log"
 
 readonly local filter_count=$(echo "$last_commit_log" | fgrep -c "$commit_filter")
-echo "number of occurrences of '$commit_filter' in '$last_commit_log': $filter_count"
+echo "Number of occurrences of '$commit_filter': $filter_count"
 
 if [[ "$filter_count" -eq 0 ]]; then
-  echo "all good, continue"
+  echo "All good, continue..."
 else
   if [[ $fail_fast == 'true' ]]; then
-    echo "the last commit log \"$last_commit_log\" contains \"$commit_filter\", stopping"
+    echo "The last commit log contains \"$commit_filter\", exiting"
     # It's impossible to finish workflow with success, so exiting using exit-code
     exit "$exit_code"
   else
-    echo "the last commit log \"$last_commit_log\" contains \"$commit_filter\", setting environment variables:"
+    echo "The last commit log contains \"$commit_filter\", setting environment variables for next steps:"
     echo "CI_SKIP=true"
     echo "CI_SKIP_NOT=false"
+    echo "And continue..."
     echo "CI_SKIP=true" >> $GITHUB_ENV
     echo "CI_SKIP_NOT=false" >> $GITHUB_ENV
   fi
