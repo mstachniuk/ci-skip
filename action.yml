@@ -12,8 +12,5 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: |
-        echo "fail-fast ${fail-fast}"
-        echo "exit-code ${exit-code}"
-        echo "End"
+    - run: $GITHUB_ACTION_PATH/script.sh
       shell: bash
