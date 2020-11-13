@@ -13,9 +13,11 @@ jobs:
       - uses: mstachniuk/ci-skip@master
       - name: Check env
         run: |
-          if [[ ! $CI_SKIP ]]; then
+          if [[ "$CI_SKIP" != true ]]; then
             echo "The CI_SKIP env should be set to true, but it is: $CI_SKIP"
+            exit 1
           fi
-          if [[ $CI_SKIP_NOT ]]; then
+          if [[ "$CI_SKIP_NOT" != false ]]; then
             echo "The CI_SKIP_NOT env should be set to false, but it is: $CI_SKIP_NOT"
+            exit 2
           fi
