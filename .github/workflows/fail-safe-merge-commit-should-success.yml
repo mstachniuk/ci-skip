@@ -7,8 +7,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          # Contains [ci skip] in message body
-          ref: '89e4cb4c830463466868cfebb8ad6c826285c40f'
+          # Contains [ci skip] in message body in merge commit
+          ref: '0928dd4ccbb9a9d5e39791011e1ec5792c495848'
           fetch-depth: '0'
       - uses: mstachniuk/ci-skip@master
       - name: Check env
