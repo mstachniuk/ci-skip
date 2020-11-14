@@ -108,10 +108,6 @@ If you would decide on merge to skip or not an action the https://github.com/mst
 
 == Alternatives
 
-. https://github.com/veggiemonk/skip-commit/issues/5[Just use YAML]
-It doesn't work for merge commits.
-. https://github.com/marketplace/actions/skip-based-on-commit-message[Skip based on commit message]
-It's a nice solution, but doesn't work on merge commits. And it's unamintained anymore.
-. https://github.com/styfle/cancel-workflow-action[Cancel Workflow Action]
-It can cancel jobs with a status of `queued` or `in_progress`.
-
+. https://github.com/veggiemonk/skip-commit/issues/5[Just use YAML]: It doesn't work for merge commits.
+. https://github.com/marketplace/actions/skip-based-on-commit-message[Skip based on commit message]: It's a nice solution, but doesn't work on merge commits and it's not maintained anymore.
+. https://github.com/styfle/cancel-workflow-action[Cancel Workflow Action]: It can cancel jobs with a status of `queued` or `in_progress`.
