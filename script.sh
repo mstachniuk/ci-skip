@@ -17,7 +17,12 @@ readonly local filter_count=$(echo "$last_commit_log" | fgrep -c "$commit_filter
 echo "Number of occurrences of '$commit_filter': $filter_count"
 
 if [[ "$filter_count" -eq 0 ]]; then
-  echo "All good, continue..."
+  echo "The last commit log contains \"$commit_filter\", setting environment variables for next steps:"
+  echo "CI_SKIP=false"
+  echo "CI_SKIP_NOT=true"
+  echo "And continue..."
+  echo "CI_SKIP=false" >> $GITHUB_ENV
+  echo "CI_SKIP_NOT=true" >> $GITHUB_ENV
 else
   if [[ $fail_fast == 'true' ]]; then
     echo "The last commit log contains \"$commit_filter\", exiting"

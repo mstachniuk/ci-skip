@@ -14,3 +14,6 @@ jobs:
         run: |
           echo "CI_SKIP: $CI_SKIP"
           echo "CI_SKIP_NOT: $CI_SKIP_NOT"
+      - name: Run tests
+        run: |
+          ./run-tests.sh

@@ -1,0 +1,10 @@
+= Changelog
+
+== v1.0.1 (2020.11.14)
+
+* Add unit tests for script
+* Create `CI_SKIP` & `CI_SKIP_NOT` envs when commit filter not found
+
+== v1.0.0 (2020.11.14)
+
+* Initial release
