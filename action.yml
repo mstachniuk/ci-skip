@@ -17,8 +17,12 @@ inputs:
     description: 'Sets the text in commit messages when skip the action. Default: [ci skip]'
     required: false
     default: '[ci skip]'
+  separator:
+    description: 'Sets the commit filter separator in case multiple filters are set.'
+    required: false
+    default: ''
 runs:
   using: "composite"
   steps:
-    - run: $GITHUB_ACTION_PATH/script.sh "${{ inputs.fail-fast }}" "${{ inputs.exit-code }}" "${{ inputs.commit-filter }}"
+    - run: $GITHUB_ACTION_PATH/script.sh "${{ inputs.fail-fast }}" "${{ inputs.exit-code }}" "${{ inputs.commit-filter }}" "${{ inputs.separator }}"
       shell: bash
