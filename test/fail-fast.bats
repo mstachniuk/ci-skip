@@ -60,3 +60,33 @@ load checkout_helper
   echo "$output"
   [ "$status" -eq 22 ]
 }
+
+@test "should fail fast and return 22 exit code with custom separator" {
+  mydir="repo-commit-contains-ci-skip-5"
+  # Contains `Test commit [ci skip];[skip ci]` in message subject
+  checkoutRevisionAndCopyScript 'b5634847ae9760ee46cf8a1c928cd8689a821744' "$mydir"
+  export GITHUB_ENV=foo.txt;
+
+  run "$BATS_TMPDIR/$mydir/ci-skip/script.sh" "true" "22" "[skip ci];[ci skip];[skip gha]" ";"
+
+  actual=$(cat foo.txt | sed ':a;N;$!ba;s/\n/,/g') # replace new line with coma
+  echo "Output:"
+  echo "$output"
+  echo "GITHUB_ENV: $actual"
+  [ "$status" -eq 22 ]
+}
+
+@test "should not fail fast and return 0 exit code without custom separator" {
+  mydir="repo-commit-contains-ci-skip-6"
+  # Contains `Test commit [ci skip];[skip ci]` in message subject
+  checkoutRevisionAndCopyScript 'b5634847ae9760ee46cf8a1c928cd8689a821744' "$mydir"
+  export GITHUB_ENV=foo.txt;
+
+  run "$BATS_TMPDIR/$mydir/ci-skip/script.sh" "true" "22" "[skip ci];[ci skip];[skip gha]"
+
+  actual=$(cat foo.txt | sed ':a;N;$!ba;s/\n/,/g') # replace new line with coma
+  echo "Output:"
+  echo "$output"
+  echo "GITHUB_ENV: $actual"
+  [ "$status" -eq 0 ]
+}
