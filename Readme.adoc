@@ -102,6 +102,20 @@ If you like to use another marker than `[ci skip]` for skipping CI build then us
 
 In this case when commit message contains `banana banana` then action will be skipped.
 
+=== Multiple filters
+
+If you want to use multiple filters at once, it's possible to separate them with the `separator` input.
+
+[source,yaml]
+----
+[...]
+      - uses: mstachniuk/ci-skip@v1
+        with:
+          commit-filter: 'banana;orange'
+					separator: ';'
+[...]
+----
+
 == Google Chrome Extension
 
 If you would decide on merge to skip or not an action the https://github.com/mstachniuk/shipkit-chrome-extension[shipkit-chrome-extension] can be helpful.
