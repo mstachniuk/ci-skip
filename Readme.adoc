@@ -112,7 +112,7 @@ If you want to use multiple filters at once, it's possible to separate them with
       - uses: mstachniuk/ci-skip@v1
         with:
           commit-filter: 'banana;orange'
-					separator: ';'
+          separator: ';'
 [...]
 ----
 
