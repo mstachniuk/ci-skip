@@ -9,7 +9,7 @@ load checkout_helper
   checkoutRevisionAndCopyScript '89e4cb4c830463466868cfebb8ad6c826285c40f' "$mydir"
   export GITHUB_ENV=foo.txt;
 
-  run "$BATS_TMPDIR/$mydir/ci-skip/script.sh" "false" "42" "[ci skip]"
+  run "$BATS_TMPDIR/$mydir/ci-skip/script.sh" "false" "42" "[ci skip]" ""
 
   echo "Output:"
   echo "$output"
@@ -26,7 +26,7 @@ load checkout_helper
   checkoutRevisionAndCopyScript '84841e1cb19c7cf14edeb0b0041cead83ed2d8c7' "$mydir"
   export GITHUB_ENV=foo.txt;
 
-  run "$BATS_TMPDIR/$mydir/ci-skip/script.sh" "false" "42" "[ci skip]"
+  run "$BATS_TMPDIR/$mydir/ci-skip/script.sh" "false" "42" "[ci skip]" ""
 
   echo "Output:"
   echo "$output"
@@ -42,7 +42,7 @@ load checkout_helper
   checkoutRevisionAndCopyScript '84841e1cb19c7cf14edeb0b0041cead83ed2d8c7' "$mydir"
   export GITHUB_ENV=foo.txt;
 
-  run "$BATS_TMPDIR/$mydir/ci-skip/script.sh" "false" "42" "Add Readme"
+  run "$BATS_TMPDIR/$mydir/ci-skip/script.sh" "false" "42" "Add Readme" ""
 
   echo "Output:"
   echo "$output"

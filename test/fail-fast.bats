@@ -8,7 +8,7 @@ load checkout_helper
   checkoutRevisionAndCopyScript '89e4cb4c830463466868cfebb8ad6c826285c40f' "$mydir"
   export GITHUB_ENV=foo.txt;
 
-  run "$BATS_TMPDIR/$mydir/ci-skip/script.sh" "true" "42" "[ci skip]"
+  run "$BATS_TMPDIR/$mydir/ci-skip/script.sh" "true" "42" "[ci skip]" ""
 
   actual=$(cat foo.txt | sed ':a;N;$!ba;s/\n/,/g') # replace new line with coma
   echo "Output:"
@@ -23,7 +23,7 @@ load checkout_helper
   checkoutRevisionAndCopyScript '89e4cb4c830463466868cfebb8ad6c826285c40f' "$mydir"
   export GITHUB_ENV=foo.txt;
 
-  run "$BATS_TMPDIR/$mydir/ci-skip/script.sh" "true" "22" "[ci skip]"
+  run "$BATS_TMPDIR/$mydir/ci-skip/script.sh" "true" "22" "[ci skip]" ""
 
   actual=$(cat foo.txt | sed ':a;N;$!ba;s/\n/,/g') # replace new line with coma
   echo "Output:"
@@ -38,7 +38,7 @@ load checkout_helper
   checkoutRevisionAndCopyScript '84841e1cb19c7cf14edeb0b0041cead83ed2d8c7' "$mydir"
   export GITHUB_ENV=foo.txt;
 
-  run "$BATS_TMPDIR/$mydir/ci-skip/script.sh" "true" "22" "[ci skip]"
+  run "$BATS_TMPDIR/$mydir/ci-skip/script.sh" "true" "22" "[ci skip]" ""
 
   actual=$(cat foo.txt | sed ':a;N;$!ba;s/\n/,/g') # replace new line with coma
   echo "Output:"
@@ -53,7 +53,7 @@ load checkout_helper
   checkoutRevisionAndCopyScript '84841e1cb19c7cf14edeb0b0041cead83ed2d8c7' "$mydir"
   export GITHUB_ENV=foo.txt;
 
-  run "$BATS_TMPDIR/$mydir/ci-skip/script.sh" "true" "22" "Add"
+  run "$BATS_TMPDIR/$mydir/ci-skip/script.sh" "true" "22" "Add" ""
 
   actual=$(cat foo.txt | sed ':a;N;$!ba;s/\n/,/g') # replace new line with coma
   echo "Output:"
@@ -82,7 +82,7 @@ load checkout_helper
   checkoutRevisionAndCopyScript 'b5634847ae9760ee46cf8a1c928cd8689a821744' "$mydir"
   export GITHUB_ENV=foo.txt;
 
-  run "$BATS_TMPDIR/$mydir/ci-skip/script.sh" "true" "22" "[skip ci];[ci skip];[skip gha]"
+  run "$BATS_TMPDIR/$mydir/ci-skip/script.sh" "true" "22" "[skip ci];[ci skip];[skip gha]" ""
 
   actual=$(cat foo.txt | sed ':a;N;$!ba;s/\n/,/g') # replace new line with coma
   echo "Output:"

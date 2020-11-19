@@ -104,7 +104,7 @@ In this case when commit message contains `banana banana` then action will be sk
 
 === Multiple filters
 
-If you want to use multiple filters at once, it's possible to separate them with the `separator` input.
+If you want to use multiple filters at once, it's possible to separate them with the `commit-filter-separator` input.
 
 [source,yaml]
 ----
@@ -112,7 +112,7 @@ If you want to use multiple filters at once, it's possible to separate them with
       - uses: mstachniuk/ci-skip@v1
         with:
           commit-filter: 'banana;orange'
-          separator: ';'
+          commit-filter-separator: ';'
 [...]
 ----
 
