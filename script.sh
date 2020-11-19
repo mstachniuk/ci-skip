@@ -2,6 +2,9 @@
 fail_fast=$1
 exit_code=$2
 commit_filter=$3
+separator=$4
+
+IFS=$4 read -ra filters <<< "$commit_filter"
 
 # Based on: https://github.com/marketplace/actions/skip-based-on-commit-message
 last_commit_log=$(git log -1 --pretty=format:"%s %b")
@@ -13,11 +16,15 @@ if [[ "$is_merge_commit" -eq 1 ]]; then
 fi
 echo "Last commit log: $last_commit_log"
 
-readonly local filter_count=$(echo "$last_commit_log" | fgrep -c "$commit_filter")
-echo "Number of occurrences of '$commit_filter': $filter_count"
+total_filter_count=0
+for filter in "${filters[@]}"; do
+	filter_count=$(echo "$last_commit_log" | fgrep -c "$filter")
+	total_filter_count=$((filter_count+total_filter_count))
+done
+echo "Number of occurrences of '$commit_filter': $total_filter_count"
 
-if [[ "$filter_count" -eq 0 ]]; then
-  echo "The last commit log contains \"$commit_filter\", setting environment variables for next steps:"
+if [[ "$total_filter_count" -eq 0 ]]; then
+  echo "The last commit log does not contains \"$commit_filter\", setting environment variables for next steps:"
   echo "CI_SKIP=false"
   echo "CI_SKIP_NOT=true"
   echo "And continue..."
