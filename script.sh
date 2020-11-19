@@ -2,9 +2,9 @@
 fail_fast=$1
 exit_code=$2
 commit_filter=$3
-separator=$4
+commit_filter_separator=$4
 
-IFS=$4 read -ra filters <<< "$commit_filter"
+IFS=$commit_filter_separator read -ra filters <<< "$commit_filter"
 
 # Based on: https://github.com/marketplace/actions/skip-based-on-commit-message
 last_commit_log=$(git log -1 --pretty=format:"%s %b")
