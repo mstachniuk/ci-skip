@@ -1,0 +1,27 @@
+on: [push]
+
+jobs:
+  check_skip:
+    runs-on: ubuntu-latest
+    outputs:
+      skip: ${{ steps.result_step.outputs.result }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          # Contains 'Test skip [ci skip];[skip ci]' in message object
+          ref: 'b5634847ae9760ee46cf8a1c928cd8689a821744'
+          fetch-depth: 0
+      - uses: mstachniuk/ci-skip@master
+        with:
+          commit-filter: '[skip ci];[ci skip]'
+          commit-filter-separator: ';'
+      - run: echo "::set-output name=result::${CI_SKIP}"
+        id: result_step
+
+  # this job should be skipped
+  test_job:
+    needs: check_skip
+    if: ${{ needs.check_skip.outputs.skip == 'false' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit 1
