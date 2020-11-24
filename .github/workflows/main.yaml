@@ -13,7 +13,7 @@ jobs:
       - name: Set Env
         run: |
           echo "CI_SKIP_VER=${{ github.head_ref }}" >> $GITHUB_ENV
-      - uses: mstachniuk/ci-skip@$CI_SKIP_VER
+      - uses: "mstachniuk/ci-skip@$CI_SKIP_VER"
         with:
           exit-code: 11
           fail-fast: true
