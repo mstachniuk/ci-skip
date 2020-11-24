@@ -25,7 +25,7 @@ jobs:
   # this job should NOT be skipped
   test_job:
     needs: check_skip
-    if: ${{ needs.check_skip.outputs.ci-skip == 'false' }}
+    if: ${{ needs.check_skip.outputs.skip == 'false' }}
     runs-on: ubuntu-latest
     steps:
       - run: |
