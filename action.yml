@@ -35,8 +35,8 @@ runs:
       shell: bash
     - id: set-outputs-step
       run: |
-        echo "CI_SKIP: ${{ CI_SKIP }}"
-        echo "::set-output name=skip::${{ CI_SKIP }}"
-        echo "::set-output name=skip-not::${{ CI_SKIP_NOT }}"
+        echo "CI_SKIP: $CI_SKIP"
+        echo "::set-output name=skip::$CI_SKIP"
+        echo "::set-output name=skip-not::$CI_SKIP_NOT"
       shell: bash
 
