@@ -7,22 +7,26 @@ on:
 jobs:
   init:
     runs-on: ubuntu-latest
+    outputs:
+      skip: ${{ steps.ci-skip-step.outputs.ci-skip }}
+      skip-not: ${{ steps.ci-skip-step.outputs.ci-skip-not }}
     steps:
       - uses: actions/checkout@v2
         with:
           # Contains [ci skip] in message body in merge commit
           ref: '0928dd4ccbb9a9d5e39791011e1ec5792c495848'
           fetch-depth: 0
-      - uses: mstachniuk/ci-skip@tag-for-test
+      - id: ci-skip-step
+        uses: mstachniuk/ci-skip@tag-for-test
 
   # this job should be skipped
   main_job:
     needs: init
-    if: ${{ needs.init.outputs.ci-skip == 'false' }}
+    if: ${{ needs.init.outputs.skip == 'false' }}
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "Output ci-skip: ${{ needs.init.outputs.ci-skip }}"
-          echo "Output ci-skip-not: ${{ needs.init.outputs.ci-skip-not }}"
+          echo "Output ci-skip: ${{ needs.init.outputs.skip }}"
+          echo "Output ci-skip-not: ${{ needs.init.outputs.skip-not }}"
           echo "The main_job should be skipped"
           exit 1
