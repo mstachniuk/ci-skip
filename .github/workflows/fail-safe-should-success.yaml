@@ -14,7 +14,7 @@ jobs:
           # Contains [ci skip] in message body
           ref: '89e4cb4c830463466868cfebb8ad6c826285c40f'
           fetch-depth: '0'
-      - uses: mstachniuk/ci-skip@${{ github.sha }}
+      - uses: mstachniuk/ci-skip@master
       - name: Check env
         run: |
           echo "CI_SKIP is $CI_SKIP"
