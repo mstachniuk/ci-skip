@@ -10,7 +10,7 @@ jobs:
     name: Build
     steps:
       - uses: actions/checkout@v2
-      - uses: mstachniuk/ci-skip@master
+      - uses: mstachniuk/ci-skip@${{ github.sha }}
         with:
           exit-code: 11
           fail-fast: true

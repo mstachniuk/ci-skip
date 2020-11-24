@@ -1,4 +1,8 @@
-on: [push]
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   check_skip:
@@ -11,7 +15,7 @@ jobs:
           # Contains 'Test skip [ci skip];[skip ci]' in message object
           ref: 'b5634847ae9760ee46cf8a1c928cd8689a821744'
           fetch-depth: 0
-      - uses: mstachniuk/ci-skip@master
+      - uses: mstachniuk/ci-skip@${{ github.sha }}
         with:
           commit-filter: '[skip ci];[ci skip]'
           commit-filter-separator: ';'

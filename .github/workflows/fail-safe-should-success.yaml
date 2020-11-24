@@ -1,4 +1,8 @@
-on: [push]
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   hello_world_job:
@@ -7,10 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          # Contains [ci skip] in message body in merge commit
-          ref: '0928dd4ccbb9a9d5e39791011e1ec5792c495848'
+          # Contains [ci skip] in message body
+          ref: '89e4cb4c830463466868cfebb8ad6c826285c40f'
           fetch-depth: '0'
-      - uses: mstachniuk/ci-skip@master
+      - uses: mstachniuk/ci-skip@${{ github.sha }}
       - name: Check env
         run: |
           echo "CI_SKIP is $CI_SKIP"

@@ -1,4 +1,8 @@
-on: [push]
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   hello_world_job:
@@ -10,7 +14,7 @@ jobs:
           # Contains Add Readme in message subject
           ref: '84841e1cb19c7cf14edeb0b0041cead83ed2d8c7'
           fetch-depth: '0'
-      - uses: mstachniuk/ci-skip@master
+      - uses: mstachniuk/ci-skip@${{ github.sha }}
         with:
           commit-filter: 'Add Readme'
       - name: Check env

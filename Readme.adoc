@@ -15,6 +15,7 @@ If the commit message (or a merge message) contains `[ci skip]` (in subject of b
 
 The simplest use case is to fail job fast after evaluating action.
 
+.Fail fast example
 [source,yaml]
 ----
 on: [push]
@@ -42,6 +43,7 @@ jobs:
 The action will immediately exit before `Validation` step returning exit code 42.
 You can customize this exit code:
 
+.Fail fast with custom exit code example
 [source,yaml]
 ----
 [...]
@@ -60,6 +62,7 @@ If you don't like it, try fail-safe.
 This is default behaviour.
 Remember to check in each next step the `env.CI_SKIP` or `env.CI_SKIP_NOT` value in `if`.
 
+.Fail safe example (from: link:.github/workflows/fail-safe-should-success.yaml[.github/workflows/fail-safe-should-success.yaml])
 [source,yaml]
 ----
 on: [push]
@@ -91,6 +94,7 @@ In this approach the build will success when commit message contains `[ci skip]`
 
 If you like to use another marker than `[ci skip]` for skipping CI build then use `commit-filter` input.
 
+.Change commit filter example (from: link:.github/workflows/fail-safe-commit-filter-should-success.yaml[.github/workflows/fail-safe-commit-filter-should-success.yaml])
 [source,yaml]
 ----
 [...]
@@ -106,6 +110,7 @@ In this case when commit message contains `banana banana` then action will be sk
 
 If you want to use multiple filters at once, it's possible to separate them with the `commit-filter-separator` input.
 
+.Multiple commit filers example (from: link:.github/workflows/fail-safe-commit-filter-separator-should-success.yaml[.github/workflows/fail-safe-commit-filter-separator-should-success.yaml])
 [source,yaml]
 ----
 [...]
@@ -120,6 +125,7 @@ If you want to use multiple filters at once, it's possible to separate them with
 
 It's also possible to create a job dedicated to check skip messages.
 
+.Job to skip example (from: link:.github/workflows/fail-safe-commit-filter-should-success.yaml[.github/workflows/fail-safe-commit-filter-should-success.yaml])
 [source,yaml]
 ----
 [...]
