@@ -18,6 +18,7 @@ jobs:
 
   # this job should NOT be skipped
   main_job:
+    needs: init
     if: ${{ needs.init-id.outputs.ci-skip-aaaa == 'false' }}
     runs-on: ubuntu-latest
     steps:
