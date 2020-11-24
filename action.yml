@@ -24,12 +24,18 @@ inputs:
 outputs:
   ci-skip:
     description: 'The output ci-skip with the value true/false, default: false'
-    value: 'false'
+    value: ${{ steps.set-outputs-step.outputs.skip }}
   ci-skip-not:
     description: 'The output ci-skip-not with the value true/false, default: true'
-    value: 'true'
+    value: ${{ steps.set-outputs-step.outputs.skip-not }}
 runs:
   using: "composite"
   steps:
     - run: $GITHUB_ACTION_PATH/script.sh "${{ inputs.fail-fast }}" "${{ inputs.exit-code }}" "${{ inputs.commit-filter }}" "${{ inputs.commit-filter-separator }}"
       shell: bash
+    - id: set-outputs-step
+      run: |
+        echo "::set-output name=skip::${{ CI_SKIP }}"
+        echo "::set-output name=skip-not::${{ CI_SKIP_NOT }}"
+      shell: bash
+
