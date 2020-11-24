@@ -125,34 +125,30 @@ If you want to use multiple filters at once, it's possible to separate them with
 
 It's also possible to create a job dedicated to check skip messages.
 
-.Job to skip example (from: link:.github/workflows/fail-safe-commit-filter-should-success.yaml[.github/workflows/fail-safe-commit-filter-should-success.yaml])
+.Job to skip example (from: link:fail-safe-check-job-should-success.yaml[fail-safe-check-job-should-success.yaml])
 [source,yaml]
 ----
 [...]
 jobs:
-  check_skip:
+  init:
     runs-on: ubuntu-latest
     outputs:
-      skip: ${{ steps.result_step.outputs.result }}
+      skip: ${{ steps.ci-skip-step.outputs.ci-skip }}
+      skip-not: ${{ steps.ci-skip-step.outputs.ci-skip-not }}
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - uses: mstachniuk/ci-skip@master
-        with:
-          commit-filter: '[skip ci];[ci skip];[skip github]'
-          commit-filter-separator: ';'
-      - run: echo "::set-output name=result::${CI_SKIP}"
-        id: result_step
+      - id: ci-skip-step
+        uses: mstachniuk/ci-skip@master
 
-  heavy_job:
-    needs: check_skip
-    if: ${{ needs.check_skip.outputs.skip == 'false' }}
-    ...
+  main_job:
+    needs: init
+    if: ${{ needs.init.outputs.skip == 'false' }}
 [...]
 ----
 
-In this example, `heavy_job` will be skipped depending on the result of `check_skip`.
+In this example, `main_job` will be skipped depending on the result of `check_skip`.
 
 == Google Chrome Extension
 

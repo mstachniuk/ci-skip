@@ -17,7 +17,7 @@ jobs:
           ref: '0928dd4ccbb9a9d5e39791011e1ec5792c495848'
           fetch-depth: 0
       - id: ci-skip-step
-        uses: mstachniuk/ci-skip@tag-for-test
+        uses: mstachniuk/ci-skip@master
       - run: |
           echo "steps.ci-skip-step.outputs.ci-skip ${{ steps.ci-skip-step.outputs.ci-skip }} SHOULD BE TRUE "
           echo "steps.ci-skip-step.outputs.ci-skip-not ${{ steps.ci-skip-step.outputs.ci-skip-not }}"

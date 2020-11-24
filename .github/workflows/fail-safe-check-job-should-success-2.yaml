@@ -17,7 +17,7 @@ jobs:
           ref: '84841e1cb19c7cf14edeb0b0041cead83ed2d8c7'
           fetch-depth: 0
       - id: ci-skip-step
-        uses: mstachniuk/ci-skip@tag-for-test
+        uses: mstachniuk/ci-skip@master
 
   # this job should NOT be skipped
   main_job:
