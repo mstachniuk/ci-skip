@@ -19,7 +19,7 @@ jobs:
       - id: ci-skip-step
         uses: mstachniuk/ci-skip@tag-for-test
       - run: |
-          echo "steps.ci-skip-step.outputs.ci-skip ${{ steps.ci-skip-step.outputs.ci-skip }}"
+          echo "steps.ci-skip-step.outputs.ci-skip ${{ steps.ci-skip-step.outputs.ci-skip }} SHOULD BE TRUE "
           echo "steps.ci-skip-step.outputs.ci-skip-not ${{ steps.ci-skip-step.outputs.ci-skip-not }}"
 
   # this job should be skipped
@@ -31,7 +31,5 @@ jobs:
       - run: |
           echo "Output ci-skip: ${{ needs.init.outputs.skip }}"
           echo "Output ci-skip-not: ${{ needs.init.outputs.skip-not }}"
-          echo "needs.init.steps.ci-skip-step.outputs.ci-skip: ${{ needs.init.steps.ci-skip-step.outputs.ci-skip }}"
-          echo "needs.init.steps.ci-skip-step.outputs.ci-skip-not: ${{ needs.init.steps.ci-skip-step.outputs.ci-skip-not }}"
           echo "The main_job should be skipped"
           exit 1

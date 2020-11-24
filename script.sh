@@ -1,3 +1,4 @@
+set -x
 
 fail_fast=$1
 exit_code=$2
@@ -27,11 +28,11 @@ if [[ "$total_filter_count" -eq 0 ]]; then
   echo "The last commit log does not contains \"$commit_filter\", setting environment variables for next steps:"
   echo "CI_SKIP=false"
   echo "CI_SKIP_NOT=true"
-  echo "And continue..."
   echo "CI_SKIP=false" >> $GITHUB_ENV
   echo "CI_SKIP_NOT=true" >> $GITHUB_ENV
   echo "::set-output name=ci-skip::false"
   echo "::set-output name=ci-skip-not::true"
+  echo "And continue..."
 else
   if [[ $fail_fast == 'true' ]]; then
     echo "The last commit log contains \"$commit_filter\", exiting"
@@ -41,10 +42,10 @@ else
     echo "The last commit log contains \"$commit_filter\", setting environment variables for next steps:"
     echo "CI_SKIP=true"
     echo "CI_SKIP_NOT=false"
-    echo "And continue..."
     echo "CI_SKIP=true" >> $GITHUB_ENV
     echo "CI_SKIP_NOT=false" >> $GITHUB_ENV
     echo "::set-output name=ci-skip::true"
     echo "::set-output name=ci-skip-not::false"
+    echo "And continue..."
   fi
 fi
