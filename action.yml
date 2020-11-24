@@ -21,6 +21,13 @@ inputs:
     description: 'Sets the commit filter separator in case multiple filters are set.'
     required: false
     default: ''
+outputs:
+  ci-skip:
+    description: 'The output ci-skip with the value true/false, default: false'
+    value: 'false'
+  ci-skip-not:
+    description: 'The output ci-skip-not with the value true/false, default: true'
+    value: 'true'
 runs:
   using: "composite"
   steps:
