@@ -1,0 +1,32 @@
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  init:
+    runs-on: ubuntu-latest
+    outputs:
+      skip: ${{ steps.ci-skip-step.outputs.ci-skip }}
+      skip-not: ${{ steps.ci-skip-step.outputs.ci-skip-not }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          # Contains Add Readme in message subject
+          ref: '84841e1cb19c7cf14edeb0b0041cead83ed2d8c7'
+          fetch-depth: 0
+      - id: ci-skip-step
+        uses: mstachniuk/ci-skip@master
+
+  # this job should NOT be skipped
+  main_job:
+    needs: init
+    if: ${{ needs.init.outputs.skip == 'false' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "Output ci-skip: ${{ needs.init.outputs.skip }}"
+          echo "Output ci-skip-not: ${{ needs.init.outputs.skip-not }}"
+          echo "The main_job should NOT be skipped"
+          exit 0

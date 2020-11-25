@@ -10,6 +10,11 @@ jobs:
     name: Build
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - name: Set Env
+        run: |
+          echo "CI_SKIP_VER=${{ github.head_ref }}" >> $GITHUB_ENV
       - uses: mstachniuk/ci-skip@master
         with:
           exit-code: 11
@@ -18,6 +23,12 @@ jobs:
         run: |
           echo "CI_SKIP: $CI_SKIP"
           echo "CI_SKIP_NOT: $CI_SKIP_NOT"
+      - name: Check github event object
+        run: |
+          echo "toJSON(github.event.commits):"
+          echo "${{ toJSON(github.event.commits) }}"
+          echo "toJSON(github.event.commits.*.message):"
+          echo "${{ toJSON(github.event.commits.*.message) }}"
       - name: Run tests
         run: |
           ./run-tests.sh

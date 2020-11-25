@@ -1,5 +1,10 @@
 = Changelog
 
+== v1.2.0 (2020.11.25)
+
+* Define action outputs
+* Job to check skip message instead of if condition in each step
+
 == v1.1.0 (2020.11.19)
 
 * Possibility to define more commit filters using separator

@@ -1,4 +1,8 @@
-on: [push]
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   hello_world_job:
@@ -7,10 +11,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          # Contains [ci skip] in message body in merge commit
-          ref: '0928dd4ccbb9a9d5e39791011e1ec5792c495848'
+          # Contains Add Readme in message subject
+          ref: '84841e1cb19c7cf14edeb0b0041cead83ed2d8c7'
           fetch-depth: '0'
       - uses: mstachniuk/ci-skip@master
+        with:
+          commit-filter: 'Add Readme'
       - name: Check env
         run: |
           echo "CI_SKIP is $CI_SKIP"

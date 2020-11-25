@@ -27,9 +27,9 @@ if [[ "$total_filter_count" -eq 0 ]]; then
   echo "The last commit log does not contains \"$commit_filter\", setting environment variables for next steps:"
   echo "CI_SKIP=false"
   echo "CI_SKIP_NOT=true"
-  echo "And continue..."
   echo "CI_SKIP=false" >> $GITHUB_ENV
   echo "CI_SKIP_NOT=true" >> $GITHUB_ENV
+  echo "And continue..."
 else
   if [[ $fail_fast == 'true' ]]; then
     echo "The last commit log contains \"$commit_filter\", exiting"
@@ -39,8 +39,8 @@ else
     echo "The last commit log contains \"$commit_filter\", setting environment variables for next steps:"
     echo "CI_SKIP=true"
     echo "CI_SKIP_NOT=false"
-    echo "And continue..."
     echo "CI_SKIP=true" >> $GITHUB_ENV
     echo "CI_SKIP_NOT=false" >> $GITHUB_ENV
+    echo "And continue..."
   fi
 fi
