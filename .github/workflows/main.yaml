@@ -21,6 +21,12 @@ jobs:
         run: |
           echo "CI_SKIP: $CI_SKIP"
           echo "CI_SKIP_NOT: $CI_SKIP_NOT"
+      - name: Check github event object
+        run: |
+          echo "toJSON(github.event.commits):"
+          echo "${{ toJSON(github.event.commits) }}"
+          echo "toJSON(github.event.commits.*.message):"
+          echo "${{ toJSON(github.event.commits.*.message) }}"
       - name: Run tests
         run: |
           ./run-tests.sh
