@@ -1,6 +1,10 @@
 = CI SKIP
 
-GitHub Actions to skip build execution based on commit message
+GitHub Actions to skip build execution based on commit message.
+
+IMPORTANT: Since 8th February 2021 GitHub Actions https://github.blog/changelog/2021-02-08-github-actions-skip-pull-request-and-push-workflows-with-skip-ci/[supports skipping workflows] out of the box. This GitHub Action is not needed anymore and will be not developed anymore. This repo is in read only mode.
+
+NOTE: Thank you for using and support! Implemented issue: https://github.com/actions/runner/issues/774[#774].
 
 Sometimes there is a need to skip build on Continuous Integration (CI) server (GitHub Actions in this case),
 e.g. to avoid many releases after several merges to master/main branch.
